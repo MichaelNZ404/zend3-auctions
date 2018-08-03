@@ -1,0 +1,35 @@
+<?php
+    $title = 'All Auctions';
+    $this->headTitle($title);
+?>
+<h1><?= $this->escapeHtml($title) ?></h1>
+<p>Displaying <?= count($auctions) ?> Auctions</p>
+<table class="table">
+<tr>
+    <th>Item</th>
+    <th>Sold by</th>
+    <th>Current Bid</th>
+    <th>Time Remaining</th>
+    <th>&nbsp;</th>
+</tr>
+<?php foreach ($auctions as $auction) : ?>
+    <tr>    
+        <td><img height="30px" src="<?= $this->escapeHtml($auction->item_image) ?>" /><?= $this->escapeHtml($auction->item_name) ?></td>
+        <td><?= $this->escapeHtml($auction->auction_owner_name) ?></td>
+        <td>
+            <img width="15px" src="<?= $this->escapeHtml($auction->currency_image) ?>" />x<?= $this->escapeHtml($auction->currency_amount) ?>
+            <p style="font-style: italic; font-size: 0.7em;">
+                <?php if($auction->leading_bidder_name) : ?>
+                    Leading bid belongs to: <?= $this->escapeHtml($auction->leading_bidder_name) ?>
+                <?php else : ?>
+                    There are no current bids</p>
+                <?php endif; ?>
+            </p>
+        </td>
+        <td><?= $this->escapeHtml($auction->time_remaining) ?></td>
+        <td>
+            <a href="<?= $this->url('auction', ['action' => 'bid', 'id' => $auction->id]) ?>">Bid</a>
+        </td>
+    </tr>
+<?php endforeach; ?>
+</table>

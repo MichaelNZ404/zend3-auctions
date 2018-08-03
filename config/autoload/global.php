@@ -13,4 +13,16 @@
 
 return [
     // ...
+    'db' => array(
+        'driver'    => 'Pdo_Pgsql',
+        'host' => '127.0.0.1',
+        'dbname'  => 'appdb',
+        'username'  => 'postgres',
+        'password' => 'postgres',
+     ),
+     'service_manager' => array(
+        'factories' => array(
+           'Zend\Db\Adapter\Adapter' => 'Zend\Db\Adapter\AdapterServiceFactory',
+        ),
+     ),
 ];

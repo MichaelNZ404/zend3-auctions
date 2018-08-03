@@ -1,0 +1,29 @@
+<?php
+    $title = 'Add new bid';
+    $this->headTitle($title);
+?>
+<h1><?= $this->escapeHtml($title) ?></h1>
+<?php
+    $currency_amount = $form->get('currency_amount');
+    $currency_amount->setAttribute('class', 'form-control');
+
+    $submit = $form->get('submit');
+    $submit->setAttribute('class', 'btn btn-primary');
+
+    $form->setAttribute('action', $this->url('auction', ['action' => 'bid']));
+    $form->prepare();
+
+    echo $this->form()->openTag($form);
+?>
+
+<div class="form-group">
+    <?= $this->formLabel($currency_amount) ?>
+    <?= $this->formElement($currency_amount) ?>
+    <?= $this->formElementErrors()->render($currency_amount, ['class' => 'help-block']) ?>
+</div>
+
+<?php
+    echo $this->formSubmit($submit);
+    echo $this->formHidden($form->get('id'));
+    echo $this->formHidden($form->get('auction_id'));
+    echo $this->form()->closeTag();
